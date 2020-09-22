@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     Basket () {
-      this.$route.push('/cart')
+      this.$router.push('/basket')
     },
     basketCount () {
       return storage.get('basket')?.items?.length || ''

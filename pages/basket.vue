@@ -9,9 +9,6 @@
           <thead>
             <tr>
               <th scope="col">
-                #
-              </th>
-              <th scope="col">
                 Название
               </th>
               <th scope="col">
@@ -40,6 +37,20 @@
           </tbody>
         </table>
       </section>
+      <div>
+        <h1 class="text-center">
+          Купон на скидку
+        </h1>
+        <input
+          class="sale"
+          placeholder="Скидка"
+          :value="sale"
+          @input="updateInput"
+        >
+        <button @click.prevent="addSale">
+          Получить скидку
+        </button>
+      </div>
     </div>
     <div>
       <section class="order">
@@ -49,8 +60,8 @@
         <div
           class="card"
         >
-          <form class="{&quot;card-body&quot;}">
-            <div class="{&quot;form-group&quot;}">
+          <form class="card-body">
+            <div class="form-group">
               <label htmlFor="phone">Телефон</label>
               <input
                 id="phone"
@@ -103,11 +114,20 @@ export default {
   },
   computed: {
     ...mapState({
-      items: state => state.basketStore.items
+      items: state => state.basketStore.items,
+      sale: state => state.basketStore.sale
     })
   },
   methods: {
     Order () {
+      this.$store.dispatch('basketStore/postOrder')
+    },
+    addSale () {
+      // заглушка для скидки :)
+      console.log('')
+    },
+    updateInput (e) {
+      this.$store.commit('updateInput', e.target.value)
     }
   }
 }

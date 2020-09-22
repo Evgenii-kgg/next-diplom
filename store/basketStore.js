@@ -3,7 +3,8 @@ import storage from '~/service/storage'
 export const state = () => ({
   address: '',
   items: storage.get('basket') || [],
-  phone: ''
+  phone: '',
+  sale: ''
 })
 
 export const mutations = {
@@ -17,12 +18,14 @@ export const mutations = {
 }
 
 export const actions = {
-  addItems (state) {
-    // const similar = state.items.find(item => (item.id === action.payload.id && item.size === action.payload.size))
-  },
   async getItem ({ commit }) {
     await fetch('http://localhost:7070/api/items').then(resp => resp.json()).then((response) => {
       commit('setItems', response)
+    })
+  },
+  async postOrder (state) {
+    await fetch('http://localhost:7070/api/items').then((response) => {
+      console.log(response)
     })
   }
 }
