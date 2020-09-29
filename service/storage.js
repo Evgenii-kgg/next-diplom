@@ -7,7 +7,6 @@ class Storage {
   }
 
   get = (name) => {
-    console.log('get')
     return this.jsonParse(localStorage.getItem(name))
   }
 

@@ -1,51 +1,46 @@
 <template>
-  <header class="container">
-    <a class="navbar-brand" href="/">
-      <img
-        :src="headerLogo"
-      >
-    </a>
-    <div class="list">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link"><nuxt-link to="/">
-            Главная
-          </nuxt-link></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <nuxt-link to="/catalog">
-              Католог
-            </nuxt-link>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><nuxt-link to="/about">
-            О магазине
-          </nuxt-link></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><nuxt-link to="/contacts">
-            Контакты
-          </nuxt-link></a>
-        </li>
-      </ul>
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+    <div class="container">
+      <div class="navbar-brand" href="/">
+        <img src="@/static/header-logo.png">
+      </div>
+      <div class="list">
+        <a class="nav-link"><nuxt-link to="/">
+          Главная
+        </nuxt-link></a>
+        <a class="nav-link">
+          <nuxt-link to="/catalog">
+            Католог
+          </nuxt-link>
+        </a>
+        <a class="nav-link"><nuxt-link to="/about">
+          О магазине
+        </nuxt-link></a>
+        <a class="nav-link"><nuxt-link to="/contacts">
+          Контакты
+        </nuxt-link></a>
+      </div>
       <div @click="Basket">
-        <button>Корзина</button>
-        <span class="header-controls-cart-full">{{ count }}</span>
+        <i class="el-icon-shopping-cart-2" />
+        <span class="header-controls">{{ count }}</span>
       </div>
     </div>
-  </header>
+  </el-menu>
 </template>
 
 <script>
-import headerLogo from 'static/header-logo.png'
+// import headerLogo from 'static/header-logo.png'
 import storage from '~/service/storage'
 export default {
   name: 'Header',
+  data () {
+    return {
+      activeIndex: '1',
+      count: storage.get('basket')?.items?.length || ''
+    }
+  },
   computed: {
-    count: storage.get('basket')?.items?.length || '',
-    headerLogo
+    // count: storage.get('basket')?.items?.length || ''
   },
   methods: {
     Basket () {
@@ -70,20 +65,8 @@ export default {
 .nav-item {
   list-style-type: none
 }
-.header-controls-cart-full {
-  position: absolute;
-  right: -10px;
-  top: -5px;
-  display: block;
-  height: 21px;
-  width: 21px;
-  font-size: 11px;
-  line-height: 21px;
-  text-align: center;
-  color: #FFFFFF;
-  border-radius: 50%;
-  background: linear-gradient(90deg, #ff65a5 1.11%, #ff8076 100%);
-  box-shadow: 0px 2px 8px rgba(255, 101, 165, 0.6), inset 0px 1px 1px #ff8076;
+.header-controls {
+  height: 30px;
 }
 .header-controls-search-form .form-control {
   width: 100%;

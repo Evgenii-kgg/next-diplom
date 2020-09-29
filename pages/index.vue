@@ -40,9 +40,9 @@
       </div>
     </section>
     <div class="text-center">
-      <button class="btn btn-outline-primary" @click="{LoadMore}">
+      <el-button @click="{LoadMore}">
         Загрузить ещё
-      </button>
+      </el-button>
     </div>
   </div>
 </template>
@@ -63,7 +63,6 @@ export default {
     ...mapState({
       items: state => state.items,
       categories: state => state.categories,
-      searchGlobal: state => state.searchGlobal,
       top: state => state.top
     })
   },
@@ -82,6 +81,7 @@ export default {
       this.$store.commit('updateInput', e.target.value)
     },
     LoadMore () {
+      // console.log('загрузить еще')
     },
     onSelectAll () {
       this.$store.dispatch('getItem')

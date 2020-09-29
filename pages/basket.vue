@@ -12,16 +12,7 @@
                 Название
               </th>
               <th scope="col">
-                Размер
-              </th>
-              <th scope="col">
-                Кол-во
-              </th>
-              <th scope="col">
                 Стоимость
-              </th>
-              <th scope="col">
-                Итого
               </th>
               <th scope="col">
                 Действия
@@ -41,15 +32,15 @@
         <h1 class="text-center">
           Купон на скидку
         </h1>
-        <input
+        <el-input
           class="sale"
           placeholder="Скидка"
           :value="sale"
           @input="updateInput"
-        >
-        <button @click.prevent="addSale">
+        />
+        <el-button @click.prevent="addSale">
           Получить скидку
-        </button>
+        </el-button>
       </div>
     </div>
     <div>
@@ -63,36 +54,34 @@
           <form class="card-body">
             <div class="form-group">
               <label htmlFor="phone">Телефон</label>
-              <input
+              <el-input
                 id="phone"
+                v-model="phone"
                 class="form-control"
                 placeholder="Ваш телефон"
-              >
+              />
             </div>
             <div class="form-group">
               <label htmlFor="address">Адрес доставки</label>
-              <input
+              <el-input
                 id="address"
+                v-model="address"
                 class="form-control"
                 placeholder="Адрес доставки"
-              >
+              />
             </div>
             <div class="form-group form-check">
-              <input
-                id="agreement"
-                type="checkbox"
-                class="form-check-input"
-              >
-              <label class="form-check-label" htmlFor="agreement">Согласен с правилами
-                доставки</label>
+              <el-checkbox class="check">
+                Согласен с правилами доставки
+              </el-checkbox>
             </div>
-            <button
+            <el-button
               type="submit"
               class="btn btn-outline-secondary"
               @:click="Order"
             >
               Оформить
-            </button>
+            </el-button>
           </form>
         </div>
       </section>
@@ -109,13 +98,19 @@ export default {
   components: {
     BasketItem
   },
-  mounted () {
+  data () {
+    return {
+      sale: '',
+      phone: '',
+      address: ''
+    }
+  },
+  created () {
     return this.$store.state.basketStore.items
   },
   computed: {
     ...mapState({
-      items: state => state.basketStore.items,
-      sale: state => state.basketStore.sale
+      items: state => state.basketStore.items
     })
   },
   methods: {
@@ -124,10 +119,9 @@ export default {
     },
     addSale () {
       // заглушка для скидки :)
-      console.log('')
     },
-    updateInput (e) {
-      this.$store.commit('updateInput', e.target.value)
+    updateInput (value) {
+      this.sale = value
     }
   }
 }
@@ -138,6 +132,7 @@ export default {
   max-width: 30rem;
   margin: 0 auto
 }
+
 .text-center {
   display: flex;
   justify-content: center;

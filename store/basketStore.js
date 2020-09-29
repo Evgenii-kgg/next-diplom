@@ -12,7 +12,6 @@ export const mutations = {
     state.counter++
   },
   setItems (state, data) {
-    console.log(data)
     state.items = data
   }
 }
@@ -23,9 +22,10 @@ export const actions = {
       commit('setItems', response)
     })
   },
+
+  // можно будет добавить в этот метод дополнительным парамметром скидку
   async postOrder (state) {
-    await fetch('http://localhost:7070/api/items').then((response) => {
-      console.log(response)
+    await fetch('http://localhost:7070/api/order').then((response) => {
     })
   }
 }

@@ -1,7 +1,7 @@
 export const state = () => ({
   count: 0,
   search: '',
-  searchGlobal: '',
+  // searchGlobal: '',
   searchCollection: [],
   offset: [],
   page: 1,
@@ -10,7 +10,7 @@ export const state = () => ({
   categories: [],
   currentCategory: '1',
   lastPage: false,
-  product: {},
+  product: null,
   snackbars: []
 })
 
@@ -18,19 +18,16 @@ export const mutations = {
   increment (state, data) {
     state.count = data
   },
-  updateInput (state, message) {
-    state.searchGlobal = message
-  },
+  // updateInput (state, message) {
+  //   state.searchGlobal = message
+  // },
   setItems (state, data) {
-    console.log(data)
     state.items = data
   },
   setTop (state, data) {
-    console.log(data)
     state.top = data
   },
   setProduct (state, data) {
-    console.log(data)
     state.product = data
   },
   setCategories (state, data) {
@@ -57,16 +54,13 @@ export const actions = {
       commit('setItems', response)
     })
   },
-  async getSearch ({ commit, state }) {
-    console.log(state)
-
-    await fetch(`http://localhost:7070/api/items?q=${state.searchGlobal}`).then(resp => resp.json()).then((response) => {
+  async getSearch ({ commit }, value) {
+    await fetch(`http://localhost:7070/api/items?q=${value}`).then(resp => resp.json()).then((response) => {
       commit('setItems', response)
     })
   },
   async getProduct ({ commit }, id) {
     await fetch(`http://localhost:7070/api/items/${id}`).then(resp => resp.json()).then((response) => {
-      console.log('response', response)
       commit('setProduct', response)
     })
   },

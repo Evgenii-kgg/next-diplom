@@ -1,25 +1,21 @@
 <template>
-  <div class="hits-list">
-    <transition name="fade">
-      <li>
-        <div @click="onChange(item.id)">
-          <img alt="" :src="item.images[0]">
-        </div>
-        <div @click="onChange(item.id)">
-          <p class="card-text">
-            {{ item.title }}
-          </p>
-          <p class="card-text">
-            {{ item.price }} руб
-          </p>
-        </div>
-        <div>
-          <el-button @click="onChange(item.id)">
-            Заказать
-          </el-button>
-        </div>
-      </li>
-    </transition>
+  <div class="list">
+    <el-card :body-style="{ padding: '0px' }">
+      <div @click="onChange(item.id)">
+        <img class="item" alt="" :src="item.images[0]">
+      </div>
+      <div @click="onChange(item.id)">
+        <p class="card-text">
+          {{ item.title }}
+        </p>
+        <p class="card-text">
+          {{ item.price }} руб
+        </p>
+      </div>
+      <el-button @click="onChange(item.id)">
+        Заказать
+      </el-button>
+    </el-card>
   </div>
 </template>
 
@@ -42,5 +38,7 @@ export default {
 </script>
 
 <style>
-
+.item {
+  height: 150px;
+}
 </style>

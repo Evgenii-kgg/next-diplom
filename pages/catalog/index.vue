@@ -14,15 +14,15 @@
         Каталог
       </h2>
       <form class="catalog-search-form">
-        <input
+        <el-input
           class="form-control"
           placeholder="Поиск"
           :value="searchGlobal"
           @input="updateInput"
-        >
-        <button @click.prevent="search">
+        />
+        <el-button @click.prevent="search(searchGlobal)">
           Поиск
-        </button>
+        </el-button>
       </form>
       <div
         class="catalog_list"
@@ -62,11 +62,16 @@ export default {
     List,
     Category
   },
+  data () {
+    return {
+      searchGlobal: ''
+    }
+  },
   computed: {
     ...mapState({
       items: state => state.items,
-      categories: state => state.categories,
-      searchGlobal: state => state.searchGlobal
+      categories: state => state.categories
+      // searchGlobal: state => state.searchGlobal
     })
   },
   // layout: 'Header',
@@ -76,11 +81,11 @@ export default {
     // this.$store.dispatch('getSearch')
   },
   methods: {
-    search () {
-      this.$store.dispatch('getSearch')
+    search (value) {
+      this.$store.dispatch('getSearch', value)
     },
-    updateInput (e) {
-      this.$store.commit('updateInput', e.target.value)
+    updateInput (value) {
+      this.searchGlobal = value
     },
     LoadMore () {
     },
@@ -93,23 +98,27 @@ export default {
 
 <style>
 .catalog_list {
-  text-align:center;
+  text-align: center;
   display: flex;
   justify-content: center;
 }
+
 .list {
   list-style-type: none;
 }
+
 .catalog-search-form {
   display: flex;
   justify-content: center;
 }
+
 .text-center {
   display: flex;
   justify-content: center;
 }
+
 .all {
   display: flex;
   align-items: center;
- }
+}
 </style>

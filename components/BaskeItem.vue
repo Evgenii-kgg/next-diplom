@@ -8,11 +8,11 @@
           <td>{{ item.count }}</td>
           <td>{{ item.price }} руб.</td>
           <td>
-            <button
+            <el-button
               @click="deleteItem(item.id)"
             >
               Удалить
-            </button>
+            </el-button>
           </td>
         </tr>
       </li>
